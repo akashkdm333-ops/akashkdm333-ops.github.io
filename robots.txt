@@ -1,0 +1,6 @@
+# Allow everything
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://akashkdm333-ops.github.io/sitemap.xml
