@@ -2,7 +2,7 @@
   "name": "GST Calculator India",
   "short_name": "GST Calc",
   "description": "Free GST Calculator for India with CGST, SGST and IGST breakup.",
-  "start_url": "./",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
