@@ -226,12 +226,52 @@ document.addEventListener('DOMContentLoaded', () => {
   init();
 });
 
-// PWA Service Worker Registration
+// ===== PWA Service Worker Register =====
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.error("SW error", err));
+  });
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("/sw.js");
-      .then(() => console.log("Service Worker registered"))
-      .catch(err => console.log("Service Worker failed:", err));
   });
 }
+
+let deferredPrompt;
+const installBtn = document.createElement("button");
+
+installBtn.innerText = "Install App";
+installBtn.style.position = "fixed";
+installBtn.style.bottom = "20px";
+installBtn.style.right = "20px";
+installBtn.style.padding = "12px 16px";
+installBtn.style.background = "#2563eb";
+installBtn.style.color = "#fff";
+installBtn.style.border = "none";
+installBtn.style.borderRadius = "8px";
+installBtn.style.cursor = "pointer";
+installBtn.style.display = "none";
+installBtn.style.zIndex = "9999";
+
+document.body.appendChild(installBtn);
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "block";
+});
+
+installBtn.addEventListener("click", async () => {
+  installBtn.style.display = "none";
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  }
+});
+
 
