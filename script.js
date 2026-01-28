@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.elements['mode'][0].checked = true;
     currencySelect.value = 'NONE';
     setDebounceValue(150);
-    results.innerHTML = `<p class="muted">Enter values and results will update live. Use the Calculate button for an immediate result.</p>`;
+    results.innerHTML = `<p class="muted">Enter values and results will update live.</p>`;
     copyBtn.classList.add('hidden');
   });
 
