@@ -12,14 +12,14 @@
   <meta name="description" content="Free online GST Calculator for India. Calculate GST inclusive & exclusive prices with CGST, SGST & IGST split. Fast, accurate & mobile-friendly." />
   <meta name="keywords" content="GST calculator, GST calculator India, CGST SGST calculator, IGST calculator, GST inclusive exclusive" />
   <meta name="author" content="Akash Kadam" />
-  <link rel="canonical" href="https://akashkdm333-ops.github.io/" />
+  <link rel="canonical" href="https://akashkdm333-ops.github.io/gstcalculator/" />
 
   <!-- OPEN GRAPH (WhatsApp / Facebook) -->
   <meta property="og:title" content="GST Calculator Online | India" />
   <meta property="og:description" content="Instant GST calculation with CGST, SGST & IGST breakup. 100% free & accurate." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://akashkdm333-ops.github.io/" />
-  <meta property="og:image" content="https://akashkdm333-ops.github.io/icons/icon-512.png" />
+  <meta property="og:url" content="https://akashkdm333-ops.github.io/gstcalculator/" />
+  <meta property="og:image" content="https://akashkdm333-ops.github.io/gstcalculator/icons/icon-512.png" />
 
   <!-- TWITTER -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -32,7 +32,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="GST Calculator" />
-  <link rel="manifest" href="manifest.json" />
 
   <!-- ICONS -->
   <link rel="icon" href="icons/icon-192.png" />
@@ -127,13 +126,13 @@
     </footer>
   </main>
 
-  <script>
+  <script src="./script.js" defer></script>
+<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js");
   });
 }
-</script>  
-  <script src="./script.js"></script>
+</script>
 </body>
 </html>
