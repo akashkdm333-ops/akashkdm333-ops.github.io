@@ -302,19 +302,3 @@ window.addEventListener("appinstalled", () => {
   const btn = document.getElementById("pwa-install-btn");
   if (btn) btn.remove();
 });
-
-// Prevent jump while typing on mobile
-const amountInput = document.getElementById("amount");
-
-amountInput.addEventListener("focus", () => {
-  setTimeout(() => {
-    amountInput.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }, 300);
-});
-
-
-
-
