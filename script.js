@@ -1,45 +1,62 @@
 const amount = document.getElementById("amount");
 const rate = document.getElementById("rate");
+const type = document.getElementById("type");
 const result = document.getElementById("result");
 const calcBtn = document.getElementById("calc");
 const clearBtn = document.getElementById("clear");
 
-// core calculate
+function money(v){
+  return "₹ " + v.toFixed(2);
+}
+
 function calculate() {
   const a = parseFloat(amount.value);
   const r = parseFloat(rate.value);
 
   if (!isFinite(a)) {
-    result.textContent = "";
+    result.innerHTML = "";
     return;
   }
 
   const gst = a * r / 100;
-  const total = a + gst;
 
-  result.textContent =
-    `GST: ${gst.toFixed(2)} | Total: ${total.toFixed(2)}`;
+  if(type.value === "intra"){
+    const cgst = gst / 2;
+    const sgst = gst / 2;
+    const total = a + gst;
+
+    result.innerHTML = `
+      Base Amount: ${money(a)}<br>
+      CGST: ${money(cgst)}<br>
+      SGST: ${money(sgst)}<br>
+      Total GST: ${money(gst)}<br>
+      <b>Total Invoice: ${money(total)}</b>
+    `;
+  }
+  else{
+    const total = a + gst;
+
+    result.innerHTML = `
+      Base Amount: ${money(a)}<br>
+      IGST: ${money(gst)}<br>
+      <b>Total Invoice: ${money(total)}</b>
+    `;
+  }
 }
 
-// auto calculate on typing
+// auto calculate
 amount.addEventListener("input", calculate);
 rate.addEventListener("change", calculate);
+type.addEventListener("change", calculate);
 
-// button calculate
 calcBtn.addEventListener("click", calculate);
 
-// clear
 clearBtn.addEventListener("click", () => {
   amount.value = "";
-  result.textContent = "";
+  result.innerHTML = "";
 });
 
-// 🔴 prevent mobile scroll jump
+// mobile scroll fix
 amount.addEventListener("focus", () => {
-  setTimeout(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "instant"
-    });
-  }, 50);
+  setTimeout(() => window.scrollTo(0,0), 50);
 });
