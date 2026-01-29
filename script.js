@@ -226,15 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
   init();
 });
 
-// ===== PWA Service Worker Register =====
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js")
-      .then(() => console.log("Service Worker Registered"))
-      .catch(err => console.error("SW error", err));
-  });
-}
-
 /* ================================
    FORCE PWA INSTALL LOGIC
 ================================ */
