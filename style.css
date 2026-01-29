@@ -90,3 +90,12 @@ button:active{transform:translateY(1px)}
   button{width:100%}
   .buttons{flex-direction:column}
 }
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+input, select {
+  font-size: 16px; /* stops iOS zoom + jump */
+}
