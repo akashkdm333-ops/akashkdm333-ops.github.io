@@ -15,7 +15,7 @@ body{
   background:linear-gradient(180deg,var(--bg),#ffffff);
   color:var(--text);
   padding:24px;
-  min-height:100vh;
+  min-height:100dvh;
 }
 .container{
   width:100%;
