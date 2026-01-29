@@ -2,71 +2,60 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>GST Calculator</title>
 
+<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
-
+<meta name="theme-color" content="#2563eb">
 </head>
+
 <body>
 
 <div class="container">
+<h1>GST Calculator</h1>
 
-  <h1>GST Calculator</h1>
+<div class="card">
 
-  <div class="card">
+<div class="row">
+<label>Amount</label>
+<input type="number" id="amount" placeholder="Enter amount">
+</div>
 
-    <div class="row">
-      <label>Amount</label>
-      <input type="number" id="amount" inputmode="decimal" placeholder="Enter amount">
-    </div>
+<div class="row">
+<label>Amount type</label>
+<fieldset>
+<label><input type="radio" name="mode" value="exclusive" checked> GST exclusive</label>
+<label><input type="radio" name="mode" value="inclusive"> GST inclusive</label>
+</fieldset>
+</div>
 
-    <div class="row">
-      <label>GST Rate</label>
-      <select id="rate">
-        <option value="5">5%</option>
-        <option value="12">12%</option>
-        <option value="18" selected>18%</option>
-        <option value="28">28%</option>
-      </select>
-    </div>
+<div class="row">
+<label>GST rate</label>
+<select id="gstRate">
+<option value="5">5%</option>
+<option value="12">12%</option>
+<option value="18" selected>18%</option>
+<option value="28">28%</option>
+</select>
+</div>
 
-    <div class="row inline">
-      <fieldset>
-        <label>
-          <input type="radio" name="mode" value="add" checked>
-          Add GST
-        </label>
-        <label>
-          <input type="radio" name="mode" value="remove">
-          Remove GST
-        </label>
-      </fieldset>
-    </div>
+<div class="buttons">
+<button id="calculate">Calculate</button>
+<button id="clear" class="secondary">Clear</button>
+</div>
 
-    <div class="buttons">
-      <button id="clearBtn">Clear</button>
-    </div>
+</div>
 
-  </div>
-
-  <div class="card results">
-
-    <div class="result-row">
-      <span>GST Amount</span>
-      <span class="value" id="gst">0.00</span>
-    </div>
-
-    <div class="result-row">
-      <span>Total</span>
-      <span class="value" id="total">0.00</span>
-    </div>
-
-  </div>
+<div class="card results">
+<h2>Results</h2>
+<div id="resultContent" class="result-content">
+<p class="muted">Enter values to calculate.</p>
+</div>
+</div>
 
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
