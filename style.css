@@ -99,6 +99,24 @@ html, body {
 input, select {
   font-size: 16px; /* stops iOS zoom + jump */
 }
+
 body {
   overscroll-behavior: contain;
+}
+
+/* ======= Added to fix screen jumping ======= */
+
+/* Prevent outline shift on input focus */
+input:focus, select:focus, input[type="range"]:focus {
+  outline-offset: 0;
+}
+
+/* Keep result box height stable to avoid layout jump */
+#resultContent {
+  min-height: 120px;
+}
+
+/* Prevent touch delay and jump on buttons and inputs */
+button, input, select {
+  touch-action: manipulation;
 }
