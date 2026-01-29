@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GST Calculator</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="icons/icon-192.png">
+
+</head>
+
+<body>
+
+<div class="container">
+<h1>GST Calculator</h1>
+
+<div class="card">
+<label>Amount</label>
+<input id="amount" type="number" placeholder="Enter amount">
+
+<label>GST %</label>
+<select id="rate">
+<option value="5">5%</option>
+<option value="12">12%</option>
+<option value="18" selected>18%</option>
+<option value="28">28%</option>
+</select>
+
+<div class="buttons">
+<button id="calc">Calculate</button>
+<button id="clear" class="secondary">Clear</button>
+</div>
+
+<div id="result"></div>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
