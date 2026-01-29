@@ -1,138 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- BASIC -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="manifest" href="/manifest.json">
-
-  <!-- SEO -->
-  <title>GST Calculator Online | Free CGST SGST IGST Calculator</title>
-  <meta name="description" content="Free online GST Calculator for India. Calculate GST inclusive & exclusive prices with CGST, SGST & IGST split. Fast, accurate & mobile-friendly." />
-  <meta name="keywords" content="GST calculator, GST calculator India, CGST SGST calculator, IGST calculator, GST inclusive exclusive" />
-  <meta name="author" content="Akash Kadam" />
-  <link rel="canonical" href="https://akashkdm333-ops.github.io/gstcalculator/" />
-
-  <!-- OPEN GRAPH (WhatsApp / Facebook) -->
-  <meta property="og:title" content="GST Calculator Online | India" />
-  <meta property="og:description" content="Instant GST calculation with CGST, SGST & IGST breakup. 100% free & accurate." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://akashkdm333-ops.github.io/gstcalculator/" />
-  <meta property="og:image" content="./icons/icon-512.png" />
-
-  <!-- TWITTER -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GST Calculator Online" />
-  <meta name="twitter:description" content="Fast & accurate GST calculator for India." />
-  <meta name="twitter:image" content="https://akashkdm333-ops.github.io/icons/icon-512.png" />
-
-  <!-- PWA -->
-  <meta name="theme-color" content="#2563eb" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="GST Calculator" />
-
-  <!-- ICONS -->
-  <link rel="icon" href="/icons/icon-192.png">
-  <link rel="apple-touch-icon" href="/icons/icon-192.png">
-
-  <!-- STYLES -->
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GST Calculator</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <main class="container" role="main">
-    <h1>GST Calculator</h1>
 
-    <form id="gstForm" class="card" autocomplete="off" aria-labelledby="gstHeading">
-      <div class="row">
-        <label for="amount">Amount</label>
-        <input id="amount" name="amount" type="number" step="0.01" min="0" placeholder="Enter amount" inputmode="decimal" />
-      </div>
+<div class="container">
 
-      <div class="row inline">
-        <fieldset>
-          <legend>Amount type</legend>
-          <label><input type="radio" name="mode" value="exclusive" checked /> GST exclusive (base price)</label>
-          <label><input type="radio" name="mode" value="inclusive" /> GST inclusive (total price)</label>
-        </fieldset>
-      </div>
+  <h1>GST Calculator</h1>
 
-      <div class="row">
-        <label for="gstRate">GST rate (%)</label>
-        <div class="rate-row">
-          <select id="gstRate" name="gstRate" aria-label="Choose GST rate">
-            <option value="0">0%</option>
-            <option value="0.25">0.25%</option>
-            <option value="3">3%</option>
-            <option value="5">5%</option>
-            <option value="12">12%</option>
-            <option value="18" selected>18%</option>
-            <option value="28">28%</option>
-            <option value="custom">Custom</option>
-          </select>
-          <input id="customRate" name="customRate" type="number" step="0.01" min="0" placeholder="Custom %" aria-label="Custom GST rate" class="hidden" />
-        </div>
-      </div>
+  <div class="card">
 
-      <div class="row inline">
-        <div style="flex:1">
-          <label for="currency">Currency</label>
-          <select id="currency" aria-label="Select currency">
-            <option value="NONE" selected>Plain number (no currency)</option>
-            <option value="INR">Indian Rupee (₹)</option>
-            <option value="USD">US Dollar ($)</option>
-            <option value="EUR">Euro (€)</option>
-            <option value="GBP">Pound (£)</option>
-            <option value="AUD">Australian Dollar (A$)</option>
-          </select>
-        </div>
+    <div class="row">
+      <label>Amount</label>
+      <input type="number" id="amount" placeholder="Enter amount">
+    </div>
 
-        <div style="width:220px">
-          <label for="debounceRange">Live debounce (ms)</label>
-          <div class="debounce-row">
-            <input id="debounceRange" type="range" min="0" max="2000" step="50" value="150" />
-            <input id="debounceNumber" type="number" min="0" max="2000" step="50" value="150" aria-label="Debounce milliseconds" />
-          </div>
-          <div class="muted small">0 = immediate</div>
-        </div>
-      </div>
+    <div class="row">
+      <label>GST Rate</label>
+      <select id="rate">
+        <option value="5">5%</option>
+        <option value="12">12%</option>
+        <option value="18" selected>18%</option>
+        <option value="28">28%</option>
+      </select>
+    </div>
 
-      <div class="buttons row">
-        <button type="button" id="calculate">Calculate</button>
-        <button type="button" id="clear" class="secondary">Clear</button>
-      </div>
-    </form>
+    <div class="buttons">
+      <button class="secondary small" id="calcBtn">Calc</button>
+      <button id="clearBtn">Clear</button>
+    </div>
 
-    <section id="results" class="card results" aria-live="polite">
-      <h2>Results</h2>
+  </div>
 
-      <div class="ad-slot" aria-hidden="true" style="margin:12px 0;display:flex;justify-content:center">
-        <div style="background:#f3f4f6;color:#65748b;padding:8px 12px;border-radius:8px;border:1px dashed #e6e9ee;max-width:728px;width:100%;text-align:center">
-          Ad placeholder — replace with AdSense or other ad network code after approval
-        </div>
-      </div>
+  <div class="card results">
+    <div class="result-row">
+      <span>GST Amount</span>
+      <span class="value" id="gst">0</span>
+    </div>
+    <div class="result-row">
+      <span>Total</span>
+      <span class="value" id="total">0</span>
+    </div>
+  </div>
 
-      <div id="resultContent" class="result-content">
-        <p class="muted">Enter values and results will update live. Use the Calculate button for an immediate result.</p>
-      </div>
-      <button id="copyResult" class="secondary small hidden">Copy result</button>
-    </section>
+</div>
 
-    <footer class="foot muted">
-      GST calculator — real-time CGST/SGST split, currency selection, and configurable debounce delay.
-      <br />
-      <a href='https://www.buymeacoffee.com/akashkdm'>Buy Me A Coffee</a> | <a href='https://www.paypal.me/akashkdm'>PayPal</a>
-    </footer>
-  </main>
-
-  <script src="./script.js" defer></script>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js");
-  });
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
