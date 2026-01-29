@@ -22,12 +22,18 @@
 <label>Amount</label>
 <input id="amount" type="number" placeholder="Enter amount">
 
+<label>Transaction Type</label>
+<select id="type">
+  <option value="intra">Within Gujarat (CGST + SGST)</option>
+  <option value="inter">Outside Gujarat (IGST)</option>
+</select>
+
 <label>GST %</label>
 <select id="rate">
-<option value="5">5%</option>
-<option value="12">12%</option>
-<option value="18" selected>18%</option>
-<option value="28">28%</option>
+  <option value="5">5%</option>
+  <option value="12">12%</option>
+  <option value="18" selected>18%</option>
+  <option value="28">28%</option>
 </select>
 
 <div class="buttons">
