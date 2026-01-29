@@ -88,3 +88,12 @@ body {
   overscroll-behavior: contain;
 }
 
+html, body {
+  height: auto;
+  min-height: 100dvh;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
