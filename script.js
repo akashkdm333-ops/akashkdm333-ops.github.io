@@ -1,62 +1,49 @@
-const amount = document.getElementById("amount");
-const rate = document.getElementById("rate");
-const type = document.getElementById("type");
-const result = document.getElementById("result");
+const amountInput = document.getElementById("amount");
+const rateSelect = document.getElementById("rate");
+const typeSelect = document.getElementById("type");
 const calcBtn = document.getElementById("calc");
 const clearBtn = document.getElementById("clear");
-
-function money(v){
-  return "₹ " + v.toFixed(2);
-}
+const resultDiv = document.getElementById("result");
 
 function calculate() {
-  const a = parseFloat(amount.value);
-  const r = parseFloat(rate.value);
+  const amount = parseFloat(amountInput.value);
+  const rate = parseFloat(rateSelect.value);
 
-  if (!isFinite(a)) {
-    result.innerHTML = "";
+  if (isNaN(amount) || amount <= 0) {
+    resultDiv.innerHTML = "Enter valid amount";
     return;
   }
 
-  const gst = a * r / 100;
+  const gst = amount * rate / 100;
+  let html = "";
 
-  if(type.value === "intra"){
+  if (typeSelect.value === "intra") {
     const cgst = gst / 2;
     const sgst = gst / 2;
-    const total = a + gst;
+    const total = amount + gst;
 
-    result.innerHTML = `
-      Base Amount: ${money(a)}<br>
-      CGST: ${money(cgst)}<br>
-      SGST: ${money(sgst)}<br>
-      Total GST: ${money(gst)}<br>
-      <b>Total Invoice: ${money(total)}</b>
+    html = `
+      <b>Base Price:</b> ₹${amount.toFixed(2)}<br>
+      <b>CGST:</b> ₹${cgst.toFixed(2)}<br>
+      <b>SGST:</b> ₹${sgst.toFixed(2)}<br>
+      <b>Total:</b> ₹${total.toFixed(2)}
+    `;
+  } else {
+    const total = amount + gst;
+
+    html = `
+      <b>Base Price:</b> ₹${amount.toFixed(2)}<br>
+      <b>IGST:</b> ₹${gst.toFixed(2)}<br>
+      <b>Total:</b> ₹${total.toFixed(2)}
     `;
   }
-  else{
-    const total = a + gst;
 
-    result.innerHTML = `
-      Base Amount: ${money(a)}<br>
-      IGST: ${money(gst)}<br>
-      <b>Total Invoice: ${money(total)}</b>
-    `;
-  }
+  resultDiv.innerHTML = html;
 }
-
-// auto calculate
-amount.addEventListener("input", calculate);
-rate.addEventListener("change", calculate);
-type.addEventListener("change", calculate);
 
 calcBtn.addEventListener("click", calculate);
 
 clearBtn.addEventListener("click", () => {
-  amount.value = "";
-  result.innerHTML = "";
-});
-
-// mobile scroll fix
-amount.addEventListener("focus", () => {
-  setTimeout(() => window.scrollTo(0,0), 50);
+  amountInput.value = "";
+  resultDiv.innerHTML = "";
 });
