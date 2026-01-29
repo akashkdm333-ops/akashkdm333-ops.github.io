@@ -1,60 +1,61 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 const amount = document.getElementById("amount");
-const rate = document.getElementById("rate");
-const gstOut = document.getElementById("gst");
-const totalOut = document.getElementById("total");
-const clearBtn = document.getElementById("clearBtn");
-const modes = document.querySelectorAll('input[name="mode"]');
+const rate = document.getElementById("gstRate");
+const result = document.getElementById("resultContent");
+const clear = document.getElementById("clear");
+const calcBtn = document.getElementById("calculate");
 
-function getMode(){
-  return document.querySelector('input[name="mode"]:checked').value;
+function calculate() {
+const val = parseFloat(amount.value);
+const r = parseFloat(rate.value);
+
+if (!val) {
+result.innerHTML = `<p class="muted">Enter values to calculate.</p>`;
+return;
 }
 
-function calculate(){
-  const a = parseFloat(amount.value) || 0;
-  const r = parseFloat(rate.value);
+let gst = val * r / 100;
+let total = val + gst;
 
-  let gst = 0;
-  let total = 0;
-
-  if(getMode() === "add"){
-    gst = a * r / 100;
-    total = a + gst;
-  } else {
-    gst = a - (a / (1 + r/100));
-    total = a - gst;
-  }
-
-  gstOut.textContent = gst.toFixed(2);
-  totalOut.textContent = total.toFixed(2);
+result.innerHTML = `
+<div class="result-row"><div>Base price</div><div>${val.toFixed(2)}</div></div>
+<div class="result-row"><div>GST</div><div>${gst.toFixed(2)}</div></div>
+<div class="result-row"><div>Total</div><div>${total.toFixed(2)}</div></div>
+`;
 }
 
-/* auto calculation */
-["input","keyup","change"].forEach(evt=>{
-  amount.addEventListener(evt, calculate);
-  rate.addEventListener(evt, calculate);
+amount.addEventListener("input", calculate);
+rate.addEventListener("change", calculate);
+calcBtn.addEventListener("click", calculate);
+
+clear.addEventListener("click", () => {
+amount.value = "";
+result.innerHTML = `<p class="muted">Enter values to calculate.</p>`;
 });
 
-modes.forEach(m=>{
-  m.addEventListener("change", calculate);
 });
 
-/* clear */
-clearBtn.addEventListener("click", ()=>{
-  amount.value="";
-  gstOut.textContent="0.00";
-  totalOut.textContent="0.00";
-  amount.focus();
-});
+/* ===== MOBILE SCREEN JUMP FIX ===== */
 
-/* keyboard jump protection */
-function lockHeight(){
-  document.body.style.minHeight = window.innerHeight + "px";
+let vh = window.innerHeight;
+
+function lockViewport() {
+document.documentElement.style.height = vh + "px";
+document.body.style.height = vh + "px";
 }
-window.addEventListener("resize", lockHeight);
-lockHeight();
 
-/* service worker */
+window.addEventListener("resize", () => {
+const diff = Math.abs(window.innerHeight - vh);
+if (diff > 150) return;
+vh = window.innerHeight;
+lockViewport();
+});
+
+lockViewport();
+
+/* ===== PWA ===== */
+
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+navigator.serviceWorker.register("sw.js");
 }
-
