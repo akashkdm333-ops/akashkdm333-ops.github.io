@@ -169,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Input/change listeners for live calculation
-  amountInput.addEventListener('input', () => scheduleCalc());
-  customRateInput.addEventListener('input', () => scheduleCalc());
-  currencySelect.addEventListener('change', () => scheduleCalc());
+ amountInput.addEventListener('input', () => {});
+ customRateInput.addEventListener('input', () => {});
+ currencySelect.addEventListener('change', () => scheduleCalc());
   // rate change already schedules in its change listener above
   const modeRadios = form.elements['mode'];
   for (const r of modeRadios) {
