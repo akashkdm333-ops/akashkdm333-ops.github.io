@@ -17,7 +17,7 @@
   <h1>GST Calculator</h1>
 
   <div class="card">
-    
+
     <label>Amount</label>
     <input id="amount" type="number" placeholder="Enter amount">
 
@@ -33,6 +33,12 @@
       <option value="12">12%</option>
       <option value="18" selected>18%</option>
       <option value="28">28%</option>
+    </select>
+
+    <label>Calculation Type</label>
+    <select id="mode">
+      <option value="exclusive">Add GST (Exclusive)</option>
+      <option value="inclusive">Remove GST (Inclusive)</option>
     </select>
 
     <div class="buttons">
@@ -51,11 +57,17 @@
   </div>
 </div>
 
+<!-- 🔥 DONATION FOOTER -->
+<div class="donation-bar">
+  <a class="btn paypal" href="https://paypal.me/akashkdm" target="_blank">Donate via PayPal</a>
+  <a class="btn bmac" href="https://buymeacoffee.com/akashkdm" target="_blank">Buy Me A Coffee</a>
+</div>
+
 <script src="script.js"></script>
 
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js");
+  navigator.serviceWorker.register("sw.js");
 }
 </script>
 
