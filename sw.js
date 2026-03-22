@@ -1,28 +1,17 @@
-const CACHE = "gst-v1";
+const CACHE = "gst-pro-v2";
 
 const FILES = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/script.js"
+  "./",
+  "./index.html",
+  "./style.css",
+  "./script.js",
+  "./manifest.json"
 ];
 
 self.addEventListener("install", e => {
   e.waitUntil(
     caches.open(CACHE).then(cache => cache.addAll(FILES))
   );
-  self.skipWaiting();
-});
-
-self.addEventListener("activate", e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.map(k => k !== CACHE && caches.delete(k))
-      )
-    )
-  );
-  self.clients.claim();
 });
 
 self.addEventListener("fetch", e => {
