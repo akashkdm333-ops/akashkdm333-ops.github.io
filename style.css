@@ -30,11 +30,11 @@ h1{
 }
 
 .card{
-  backdrop-filter:var(--blur);
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.85); /* 🔥 darker solid */
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 label{
@@ -44,12 +44,14 @@ label{
 
 input,select{
   width:100%;
+  max-width:100%;
   padding:12px;
   margin-top:6px;
   border-radius:10px;
   border:none;
   background:#020617;
   color:white;
+  font-size:15px;
 }
 
 .buttons{
@@ -76,7 +78,9 @@ button.secondary{
 
 #result{
   margin-top:16px;
-  font-weight:bold;
+  font-weight:600;
+  color:#f1f5f9; /* 🔥 bright text */
+  line-height:1.6;
 }
 
 .history{
