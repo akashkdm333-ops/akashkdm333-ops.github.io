@@ -27,7 +27,6 @@ body{
 h1{
   text-align:center;
   margin-bottom:20px;
-  font-size:28px;
 }
 
 .card{
@@ -41,7 +40,6 @@ h1{
 label{
   display:block;
   margin-top:12px;
-  font-size:14px;
 }
 
 input,select{
@@ -50,7 +48,6 @@ input,select{
   margin-top:6px;
   border-radius:10px;
   border:none;
-  outline:none;
   background:#020617;
   color:white;
 }
@@ -83,7 +80,7 @@ button.secondary{
 }
 
 .history{
-  margin-top:20px;
+  margin-top:15px;
   font-size:13px;
   max-height:120px;
   overflow:auto;
