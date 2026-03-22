@@ -17,38 +17,44 @@ function calculate() {
 
   let base = 0, gst = 0, total = 0;
 
+  // 🔥 Exclusive → GST add
   if (modeSelect.value === "exclusive") {
     base = amount;
-    gst = base * rate / 100;
+    gst = (base * rate) / 100;
     total = base + gst;
-  } else {
+  }
+
+  // 🔥 Inclusive → GST remove
+  else {
     total = amount;
     base = total / (1 + rate / 100);
     gst = total - base;
   }
 
-  let html = `
+  let output = `
     <b>Base Price:</b> ₹${base.toFixed(2)}<br>
-    <b>GST (${rate}%):</b> ₹${gst.toFixed(2)}<br>
+    <b>Total GST (${rate}%):</b> ₹${gst.toFixed(2)}<br>
   `;
 
+  // 🔥 Tax split logic
   if (typeSelect.value === "intra") {
     const cgst = gst / 2;
     const sgst = gst / 2;
 
-    html += `
+    output += `
       <b>CGST:</b> ₹${cgst.toFixed(2)}<br>
       <b>SGST:</b> ₹${sgst.toFixed(2)}<br>
     `;
   } else {
-    html += `<b>IGST:</b> ₹${gst.toFixed(2)}<br>`;
+    output += `<b>IGST:</b> ₹${gst.toFixed(2)}<br>`;
   }
 
-  html += `<b>Total:</b> ₹${total.toFixed(2)}`;
+  output += `<b>Total Amount:</b> ₹${total.toFixed(2)}`;
 
-  resultDiv.innerHTML = html;
+  resultDiv.innerHTML = output;
 }
 
+// 🔘 Events
 calcBtn.addEventListener("click", calculate);
 
 clearBtn.addEventListener("click", () => {
