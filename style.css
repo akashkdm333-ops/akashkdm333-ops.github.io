@@ -110,6 +110,10 @@ button.secondary{
   font-size:14px;
 }
 
+#result{
+  transition: all 0.2s ease;
+}
+
 .paypal{
   background:#0070ba;
   color:white;
