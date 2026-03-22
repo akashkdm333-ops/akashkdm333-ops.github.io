@@ -1,49 +1,18 @@
-const amountInput = document.getElementById("amount");
-const rateSelect = document.getElementById("rate");
-const typeSelect = document.getElementById("type");
-const calcBtn = document.getElementById("calc");
-const clearBtn = document.getElementById("clear");
-const resultDiv = document.getElementById("result");
-
-function calculate() {
-  const amount = parseFloat(amountInput.value);
-  const rate = parseFloat(rateSelect.value);
-
-  if (isNaN(amount) || amount <= 0) {
-    resultDiv.innerHTML = "Enter valid amount";
-    return;
-  }
-
-  const gst = amount * rate / 100;
-  let html = "";
-
-  if (typeSelect.value === "intra") {
-    const cgst = gst / 2;
-    const sgst = gst / 2;
-    const total = amount + gst;
-
-    html = `
-      <b>Base Price:</b> ₹${amount.toFixed(2)}<br>
-      <b>CGST:</b> ₹${cgst.toFixed(2)}<br>
-      <b>SGST:</b> ₹${sgst.toFixed(2)}<br>
-      <b>Total:</b> ₹${total.toFixed(2)}
-    `;
-  } else {
-    const total = amount + gst;
-
-    html = `
-      <b>Base Price:</b> ₹${amount.toFixed(2)}<br>
-      <b>IGST:</b> ₹${gst.toFixed(2)}<br>
-      <b>Total:</b> ₹${total.toFixed(2)}
-    `;
-  }
-
-  resultDiv.innerHTML = html;
+function saveHistory(data){
+  let history = JSON.parse(localStorage.getItem("gst_history")) || [];
+  history.unshift(data);
+  history = history.slice(0,5);
+  localStorage.setItem("gst_history", JSON.stringify(history));
+  renderHistory();
 }
 
-calcBtn.addEventListener("click", calculate);
+function renderHistory(){
+  const history = JSON.parse(localStorage.getItem("gst_history")) || [];
+  const box = document.getElementById("history");
 
-clearBtn.addEventListener("click", () => {
-  amountInput.value = "";
-  resultDiv.innerHTML = "";
-});
+  if(!box) return;
+
+  box.innerHTML = history.map(h => `
+    <div>₹${h.amount} → ₹${h.total}</div>
+  `).join("");
+}
