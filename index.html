@@ -2,55 +2,62 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>GST Calculator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GST Calculator Pro</title>
 
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
-
-<meta name="theme-color" content="#2563eb">
-<link rel="icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#38bdf8">
 
 </head>
 
 <body>
 
 <div class="container">
-<h1>GST Calculator</h1>
+  <h1>GST Calculator</h1>
 
-<div class="card">
-<label>Amount</label>
-<input id="amount" type="number" placeholder="Enter amount">
+  <div class="card">
+    
+    <label>Amount</label>
+    <input id="amount" type="number" placeholder="Enter amount">
 
-<label>Transaction Type</label>
-<select id="type">
-  <option value="intra">Within Gujarat (CGST + SGST)</option>
-  <option value="inter">Outside Gujarat (IGST)</option>
-</select>
+    <label>Transaction Type</label>
+    <select id="type">
+      <option value="intra">CGST + SGST</option>
+      <option value="inter">IGST</option>
+    </select>
 
-<label>GST %</label>
-<select id="rate">
-  <option value="5">5%</option>
-  <option value="12">12%</option>
-  <option value="18" selected>18%</option>
-  <option value="28">28%</option>
-</select>
+    <label>GST %</label>
+    <select id="rate">
+      <option value="5">5%</option>
+      <option value="12">12%</option>
+      <option value="18" selected>18%</option>
+      <option value="28">28%</option>
+    </select>
 
-<div class="buttons">
-<button id="calc">Calculate</button>
-<button id="clear" class="secondary">Clear</button>
-</div>
+    <div class="buttons">
+      <button id="calc">Calculate</button>
+      <button id="clear" class="secondary">Clear</button>
+    </div>
 
-<div id="result"></div>
-</div>
+    <div id="result"></div>
+
+    <button id="installBtn" style="display:none;margin-top:10px;">
+      Install App
+    </button>
+
+    <div class="history" id="history"></div>
+
+  </div>
 </div>
 
 <script src="script.js"></script>
- <script>
+
+<script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js")
-    .then(() => console.log("SW ready"));
+  navigator.serviceWorker.register("sw.js");
 }
 </script>
+
 </body>
 </html>
