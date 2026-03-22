@@ -1,6 +1,7 @@
 const amountInput = document.getElementById("amount");
 const rateSelect = document.getElementById("rate");
 const typeSelect = document.getElementById("type");
+const modeSelect = document.getElementById("mode");
 const calcBtn = document.getElementById("calc");
 const clearBtn = document.getElementById("clear");
 const resultDiv = document.getElementById("result");
@@ -14,34 +15,38 @@ function calculate() {
     return;
   }
 
-  const gst = amount * rate / 100;
-  let total = amount + gst;
-  let html = "";
+  let base = 0, gst = 0, total = 0;
+
+  if (modeSelect.value === "exclusive") {
+    base = amount;
+    gst = base * rate / 100;
+    total = base + gst;
+  } else {
+    total = amount;
+    base = total / (1 + rate / 100);
+    gst = total - base;
+  }
+
+  let html = `
+    <b>Base Price:</b> ₹${base.toFixed(2)}<br>
+    <b>GST (${rate}%):</b> ₹${gst.toFixed(2)}<br>
+  `;
 
   if (typeSelect.value === "intra") {
     const cgst = gst / 2;
     const sgst = gst / 2;
 
-    html = `
-      Base: ₹${amount.toFixed(2)}<br>
-      CGST: ₹${cgst.toFixed(2)}<br>
-      SGST: ₹${sgst.toFixed(2)}<br>
-      Total: ₹${total.toFixed(2)}
+    html += `
+      <b>CGST:</b> ₹${cgst.toFixed(2)}<br>
+      <b>SGST:</b> ₹${sgst.toFixed(2)}<br>
     `;
   } else {
-    html = `
-      Base: ₹${amount.toFixed(2)}<br>
-      IGST: ₹${gst.toFixed(2)}<br>
-      Total: ₹${total.toFixed(2)}
-    `;
+    html += `<b>IGST:</b> ₹${gst.toFixed(2)}<br>`;
   }
 
-  resultDiv.innerHTML = html;
+  html += `<b>Total:</b> ₹${total.toFixed(2)}`;
 
-  saveHistory({
-    amount: amount,
-    total: total.toFixed(2)
-  });
+  resultDiv.innerHTML = html;
 }
 
 calcBtn.addEventListener("click", calculate);
@@ -49,39 +54,4 @@ calcBtn.addEventListener("click", calculate);
 clearBtn.addEventListener("click", () => {
   amountInput.value = "";
   resultDiv.innerHTML = "";
-  localStorage.removeItem("gst_history");
-  renderHistory();
-});
-
-function saveHistory(data){
-  let history = JSON.parse(localStorage.getItem("gst_history")) || [];
-  history.unshift(data);
-  history = history.slice(0,5);
-  localStorage.setItem("gst_history", JSON.stringify(history));
-  renderHistory();
-}
-
-function renderHistory(){
-  const history = JSON.parse(localStorage.getItem("gst_history")) || [];
-  const box = document.getElementById("history");
-
-  box.innerHTML = history.map(h => `
-    <div>₹${h.amount} → ₹${h.total}</div>
-  `).join("");
-}
-
-renderHistory();
-
-/* INSTALL BUTTON */
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById("installBtn").style.display = "block";
-});
-
-document.getElementById("installBtn").addEventListener("click", async () => {
-  deferredPrompt.prompt();
-  deferredPrompt = null;
 });
