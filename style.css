@@ -1,59 +1,58 @@
 :root{
-  --bg:#f6f8fa;
-  --card:#ffffff;
-  --accent:#2563eb;
-  --text:#111827;
-  --radius:12px;
-  --shadow:0 6px 18px rgba(16,24,40,0.06);
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial;
+  --bg:linear-gradient(135deg,#0f172a,#1e293b);
+  --card:rgba(255,255,255,0.05);
+  --accent:#38bdf8;
+  --text:#e2e8f0;
+  --radius:16px;
+  --blur:blur(16px);
+  font-family: Inter, system-ui;
 }
 
-*{box-sizing:border-box}
-
-html,body{
+body{
   margin:0;
-  padding:0;
+  min-height:100vh;
   background:var(--bg);
   color:var(--text);
-  min-height:100vh;
-}
-
-/* 🔴 IMPORTANT — prevents mobile jump */
-body{
-  padding:20px;
-  overscroll-behavior:contain;
-  -webkit-text-size-adjust:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .container{
-  max-width:600px;
-  margin:auto;
+  width:100%;
+  max-width:420px;
+  padding:16px;
 }
 
 h1{
-  margin-bottom:12px;
+  text-align:center;
+  margin-bottom:20px;
+  font-size:28px;
 }
 
 .card{
+  backdrop-filter:var(--blur);
   background:var(--card);
   border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:18px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
 label{
   display:block;
-  margin-top:10px;
-  font-weight:600;
+  margin-top:12px;
+  font-size:14px;
 }
 
-input, select{
+input,select{
   width:100%;
   padding:12px;
   margin-top:6px;
-  border-radius:8px;
-  border:1px solid #e5e7eb;
-  font-size:16px; /* 🔴 prevents zoom jump */
+  border-radius:10px;
+  border:none;
+  outline:none;
+  background:#020617;
+  color:white;
 }
 
 .buttons{
@@ -65,21 +64,27 @@ input, select{
 button{
   flex:1;
   padding:12px;
-  border-radius:10px;
-  border:0;
-  cursor:pointer;
-  font-weight:600;
+  border:none;
+  border-radius:12px;
   background:var(--accent);
-  color:white;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 button.secondary{
-  background:#eef2ff;
-  color:var(--accent);
+  background:#1e293b;
+  color:white;
 }
 
 #result{
-  margin-top:18px;
-  font-size:1.1rem;
-  font-weight:700;
+  margin-top:16px;
+  font-weight:bold;
+}
+
+.history{
+  margin-top:20px;
+  font-size:13px;
+  max-height:120px;
+  overflow:auto;
 }
