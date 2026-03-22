@@ -1,4 +1,4 @@
-const CACHE = "gst-pro-v2";
+const CACHE = "gst-pro-v3";
 
 const FILES = [
   "./",
