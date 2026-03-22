@@ -85,3 +85,35 @@ button.secondary{
   max-height:120px;
   overflow:auto;
 }
+
+/* 🔥 DONATION BAR */
+.donation-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  gap:10px;
+  padding:10px;
+  background:#020617;
+  justify-content:center;
+  z-index:999;
+}
+
+.btn{
+  padding:10px 14px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+}
+
+.paypal{
+  background:#0070ba;
+  color:white;
+}
+
+.bmac{
+  background:#ffdd00;
+  color:black;
+}
