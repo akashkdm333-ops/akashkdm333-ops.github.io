@@ -1,4 +1,4 @@
-const amountInput = document.getElementById("amount");
+const amountInput = document.getElementById("amount")
 const rateSelect = document.getElementById("rate");
 const typeSelect = document.getElementById("type");
 const calcBtn = document.getElementById("calc");
