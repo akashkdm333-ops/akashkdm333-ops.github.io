@@ -4,7 +4,7 @@
   --accent:#38bdf8;
   --text:#e2e8f0;
   --radius:16px;
-  --blur:blur(16px);
+  --blur:blur(10px);
   font-family: Inter, system-ui;
 }
 
