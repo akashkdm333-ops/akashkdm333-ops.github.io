@@ -88,6 +88,10 @@ button.secondary{
   overflow:auto;
 }
 
+#result{
+  transition: all 0.2s ease;
+}
+
 /* 🔥 DONATION BAR */
 .donation-bar{
   position:fixed;
