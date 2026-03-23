@@ -47,3 +47,17 @@ amountInput.addEventListener("input", calculate);
 rateSelect.addEventListener("change", calculate);
 typeSelect.addEventListener("change", calculate);
 modeSelect.addEventListener("change", calculate);
+
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // 🔥 AUTO SHOW POPUP after 2 sec
+  setTimeout(() => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+    }
+  }, 2000);
+});
