@@ -53,11 +53,11 @@ let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
+});
 
-  // 🔥 AUTO SHOW POPUP after 2 sec
-  setTimeout(() => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-    }
-  }, 2000);
+// 👇 button click pe hi open hoga
+document.getElementById("installBtn").addEventListener("click", () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+  }
 });
