@@ -8,16 +8,16 @@ function calculate() {
   const amount = parseFloat(amountInput.value);
   const rate = parseFloat(rateSelect.value);
 
-  if (isNaN(amount) || amount <= 0) {
+  if (!amount || amount <= 0) {
     resultDiv.innerHTML = "";
     return;
   }
 
-  let base = 0, gst = 0, total = 0;
+  let base, gst, total;
 
   if (modeSelect.value === "exclusive") {
     base = amount;
-    gst = (base * rate) / 100;
+    gst = base * rate / 100;
     total = base + gst;
   } else {
     total = amount;
@@ -25,45 +25,25 @@ function calculate() {
     gst = total - base;
   }
 
-  let output = `
-    <b>Base Price:</b> ₹${base.toFixed(2)}<br>
-    <b>GST (${rate}%):</b> ₹${gst.toFixed(2)}<br>
+  let html = `
+    Base: ₹${base.toFixed(2)}<br>
+    GST: ₹${gst.toFixed(2)}<br>
   `;
 
   if (typeSelect.value === "intra") {
-    const cgst = gst / 2;
-    const sgst = gst / 2;
-
-    output += `
-      <b>CGST:</b> ₹${cgst.toFixed(2)}<br>
-      <b>SGST:</b> ₹${sgst.toFixed(2)}<br>
-    `;
+    html += `CGST: ₹${(gst/2).toFixed(2)}<br>
+             SGST: ₹${(gst/2).toFixed(2)}<br>`;
   } else {
-    output += `<b>IGST:</b> ₹${gst.toFixed(2)}<br>`;
+    html += `IGST: ₹${gst.toFixed(2)}<br>`;
   }
 
-  output += `<b>Total:</b> ₹${total.toFixed(2)}`;
+  html += `<b>Total: ₹${total.toFixed(2)}</b>`;
 
-  resultDiv.innerHTML = output;
-}
-
-function clearAll() {
-  amountInput.value = "";
-  resultDiv.innerHTML = "";
+  resultDiv.innerHTML = html;
 }
 
 /* 🔥 AUTO EVENTS */
-
-// typing pe
 amountInput.addEventListener("input", calculate);
-
-// dropdown change pe
 rateSelect.addEventListener("change", calculate);
 typeSelect.addEventListener("change", calculate);
 modeSelect.addEventListener("change", calculate);
-
-/* optional clear button */
-const clearBtn = document.getElementById("clear");
-if (clearBtn) {
-  clearBtn.addEventListener("click", clearAll);
-}
