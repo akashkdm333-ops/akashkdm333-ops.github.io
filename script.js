@@ -61,3 +61,21 @@ document.getElementById("installBtn").addEventListener("click", () => {
     deferredPrompt.prompt();
   }
 });
+
+// 🔥 CLEAR BUTTON FIX
+const clearBtn = document.getElementById("clear");
+
+function clearAll() {
+  amountInput.value = "";
+  resultDiv.innerHTML = "";
+
+  // optional reset
+  rateSelect.value = "18";
+  typeSelect.value = "intra";
+  modeSelect.value = "exclusive";
+}
+
+// event connect
+if (clearBtn) {
+  clearBtn.addEventListener("click", clearAll);
+}
