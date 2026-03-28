@@ -1,4 +1,4 @@
-const CACHE = "gst-pro-v99"; // 🔥 version change karo
+const CACHE = "gst-pro-v101"; // 🔥 version change karo
 
 const FILES = [
   "./",
